@@ -4,8 +4,6 @@ title: Przecięcia zera
 language_tabs: # must be one of https://git.io/vQNgJ
   - c
   - python
-  - shell
-  - text
 
 toc_footers:
   - <a href='https://github.com/xHeler'> - Github</a>
@@ -191,174 +189,86 @@ P | Q |  | P^Q
 1 | 0 |  | 1
 1 | 1 |  | 0
 
+## Przepis znaku
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+```c
+if (numberAmount != 0) previousSign = actuallySign;
 ```
 
-```python
-import kittn
+Gdy znak został juz sprawdzony dla danej liczby jest przekazywany dla kolejnej
+w zmiennej previousSign.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+## Wielkość pakietu
+
+```c
+if (numberAmount == SIZE_OF_PACKAGE)
 ```
 
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
+Gdy ilość liczb jest równa wielkości pakietu następuje zamknięcie 
+pojedyńczego pakietu danych.
 
-```javascript
-const kittn = require('kittn');
+## Częstotliowość 
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+```c
+if ( FMIN > intersectionAmount || FMAX < intersectionAmount){
+  printf("Nieprawidlowy puls: %d \n",intersectionAmount);
+} else {
+  printf("Prawidlowy puls: %d \n",intersectionAmount);
 }
 ```
+Jeżeli częstotliowość nie mieści się w danym przedziale pokazana jest informacja
+o nieprawidłowej częstotliości w przeciwnym wypadku o poprawnej.
 
-This endpoint retrieves a specific kitten.
+<aside class="warning">W orginalnym programie powinna być wyświetlana tylko wartość niepoprawna.
+Mój program pokazuje obie w celu łatwiejszego sprawdzenia.</aside>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+## Przywrócenie danych domyślnych
 
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+```c
+number = 100;
+numberAmount = 0;
+intersectionAmount = 0;
+previousSign = None;
+actuallySign = None;
 ```
+Przywracane są dane do stanów początkowych aby można było bezbłędnie
+sprawdzić kolejny pakiet.
+
+#Testy
 
 ```python
-import kittn
+import matplotlib.pyplot as plt
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+# Open file
+file = open("path")
+
+data = []
+i = 0
+Lines = file.readlines()
+
+# Getting value from file and packing to array
+for line in Lines:
+    if line != "\n":
+        i += 1
+        if int(line) != 99:
+            data.append(int(line))
+
+plt.plot(data, 'ro', label='Wartosci jako punkty')
+plt.plot(data, 'g',  label='Wartosci jako funkcja')
+plt.plot([0, 1000], [-10, -10], 'k--')
+plt.plot([0, 1000], [10, 10], 'k--')
+plt.plot([0, 1000], [0, 0], 'k--')
+
+# Adding extra info
+plt.xlabel("Numer pakietu w czasie")
+plt.ylabel("Wartość")
+plt.legend()
+# Main plot size
+plt.axis([0, 10, -20, 20])
+plt.show()
 ```
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
+Wykresy sporzadzone zostały w języku python. Wersja 3.7.4, biblioteka matplotlib.
+Każdy test wykonany takim samym kodem.
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
