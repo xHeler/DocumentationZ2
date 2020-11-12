@@ -1,5 +1,5 @@
 ---
-title: Przecięcia zera - L2
+title: Przecięcia zera
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - c
@@ -8,11 +8,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - text
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors.md.erb
+  - <a href='https://github.com/xHeler'> - Github</a>
+  - <a href='https://gitlab.com/bartosz.kwiatkowski'> - Gitlab</a>
 
 search: true
 
@@ -23,47 +20,90 @@ code_clipboard: true
 
 Dokumentacja programu z lab 2 - Przecięcia zera.
 
-# Test
+# Kod
 
-Testowy dokument
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+Program został napisany zgodnie ze standardem c99, kompilator GNU GCC.
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+gcc -std=c99 -Wall -pedantic -o out/main.out main.c
 ```
 
-```javascript
-const kittn = require('kittn');
+## Biblioteki, stałe
 
-let api = kittn.authorize('meowmeowmeow');
+> Biblioteki
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+```
+> Stałe
+
+```c
+#define MIN -10
+#define MAX 10
+#define FMIN 8
+#define FMAX 12
+#define SIZE_OF_PACKAGE 4
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Została biblioteka zaimplementowana biblioteka standardowa.
+Co do wartości stałych są to wartości zakresów poprawnych oraz
+wartość wielkości pakietu.
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+Nazwa | Wartość| Opis
+--------- | ------- | -----------
+MIN | -10 | Wartość minimalna zakresu poprawnych danych
+MAX | 10 | Wartość maksymalna zakresu poprawnych danych
+FMIN | 8 | Wartość minimalna zakresu poprawnej częstotliowości
+FMAX | 12 | Wartość maksymalna zakresu poprawnej częstotliowości
+SIZE_OF_PACKAGE | 99 | Wielkość pakietu danych
 
-`Authorization: meowmeowmeow`
+## Zmienne globalne, struktury
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+> Struktura enum
+
+```c
+typedef enum{
+    False = 0,
+    True  = 1,
+    None  = 2, 
+} sign;
+```
+
+> Zmienne globalne
+
+```c
+int number;
+int numberAmount = 0;
+int intersectionAmount = 0;
+sign previousSign = None;
+sign actuallySign = None;
+```
+
+Użyłem strukturę enum, która jest typem wyliczeniowym
+i dla kolejnych argumentów przyjmuje rosnące wartości.
+Wartości globalne to aktualnie odczytany numer, ilość 
+wartości w pakiecie oraz liczba przecięć. Przechowywany
+w strukturze enum jest znak.
+
+### Struktura
+
+Nazwa | Wartość | Opis
+--------- | ------- | -----------
+False | 0 | Wartość ta jest przyjmowana dla liczby ujemnej
+True | 1 | Wartość ta jest przyjmowana dla liczby dodatniej
+None | 2 | Wartość przejściowa
+
+### Zmienne globalne
+
+Nazwa | Wartość | Opis
+--------- | ------- | -----------
+number | null | Przechowywany aktualna wartość
+numberAmount | 0 | Ilość liczb liczących w pakiecie
+intersectionAmount | 0 | Ilość przecięc zera
+previousSign | None | Znak poprzedniej liczby
+actuallySign | None | Znak aktualnie badanej liczby
 
 # Kittens
 
