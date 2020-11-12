@@ -44,6 +44,7 @@ gcc -std=c99 -Wall -pedantic -o out/main.out main.c
 #define FMIN 8
 #define FMAX 12
 #define SIZE_OF_PACKAGE 4
+#define END 99
 ```
 
 
@@ -58,6 +59,11 @@ MAX | 10 | Wartość maksymalna zakresu poprawnych danych
 FMIN | 8 | Wartość minimalna zakresu poprawnej częstotliowości
 FMAX | 12 | Wartość maksymalna zakresu poprawnej częstotliowości
 SIZE_OF_PACKAGE | 99 | Wielkość pakietu danych
+END | 99 | Wartość kończąca działanie programu
+
+<aside class="warning">Jako SIZE_OF_PACKAGE zaleca się użycia liczby większej równej 1.</aside>
+<aside class="warning">Jako END zaleca się użycia liczby z poza zakresu MIN | MAX.</aside>
+
 
 ## Zmienne globalne, struktury
 
@@ -105,7 +111,86 @@ intersectionAmount | 0 | Ilość przecięc zera
 previousSign | None | Znak poprzedniej liczby
 actuallySign | None | Znak aktualnie badanej liczby
 
-# Kittens
+## Sprawdzanie odczytanej wartości
+
+```c
+if (scanf("%d", &number) == 1)
+```
+
+Warunkiem wykonania jest wczytanie przez scanf wartości typu int,
+czyli puste linie są nie brane pod uwagę.
+
+## Iteracja po pakiecie danych
+
+```c
+numberAmount++;
+```
+
+Liczba danych aktualnie liczonego pakietu zostaje iterowana.
+
+## Sprawdzenie wartości kończącej program
+
+```c
+if (number == END){
+  break;
+}
+```
+
+Program zostaje zakończony po odczytaniu wartości END deklarowanej wcześniej.
+
+## Sprawdzenie zakresu odczytanej wartości
+
+```c
+if (number >= MIN && number <= MAX)
+```
+
+Program sprawdza czy odczytana liczba mieści się w ramie wcześniej
+sprecyzowanego zakresu.
+
+## Znak aktualnej, poprzedniej liczby
+
+### Przypadek zera lub zer
+>Pętla w pętli
+
+```c
+if (numberAmount > 1)
+  if (number == 0)  
+    actuallySign = previousSign;
+```
+
+Tutaj przekazywana jest informacja o poprzednim znaku w przypadku
+gdy pojawia się zero. Zero działa jak kurer przekazujący znak znajdujący
+się przed sekcją zera lub zer.
+
+### Przypisanie znaku
+
+```c
+if (number > 0)      actuallySign = True;
+else if (number < 0) actuallySign = False;
+```
+
+W przypadku gdy liczba jest większa od zera znak zmieniamy na True,
+w przeciwnym razie na False.
+
+## Przecięcie zera
+
+```c
+if (((actuallySign ^ previousSign) == 1) &&
+  previousSign != None && actuallySign != None)
+    intersectionAmount++;
+```
+Przecięcie zera występuje jeżeli poprzednia wartość i aktualna są różne od None
+oraz gdy alternatywa rozłączna znaków jest równa 1.
+
+### Alternatywa rozłączna XOR
+
+P | Q |  | P^Q 
+--------- | ------- | ----------- |  -----------
+0 | 0 |  | 0
+0 | 1 |  | 1
+1 | 0 |  | 1
+1 | 1 |  | 0
+
 
 ## Get All Kittens
 
