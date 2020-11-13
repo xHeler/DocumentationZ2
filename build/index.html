@@ -1,0 +1,656 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Przecięcia zera</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-e033bdd3.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;c&quot;,&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-d1d57a34.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="c">c</a>
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#opis" class="toc-h1 toc-link" data-title="Opis">Opis</a>
+          </li>
+          <li>
+            <a href="#kod" class="toc-h1 toc-link" data-title="Kod">Kod</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#biblioteki-stale" class="toc-h2 toc-link" data-title="Biblioteki, stałe">Biblioteki, stałe</a>
+                  </li>
+                  <li>
+                    <a href="#zmienne-globalne-struktury" class="toc-h2 toc-link" data-title="Zmienne globalne, struktury">Zmienne globalne, struktury</a>
+                  </li>
+                  <li>
+                    <a href="#sprawdzanie-odczytanej-wartosci" class="toc-h2 toc-link" data-title="Sprawdzanie odczytanej wartości">Sprawdzanie odczytanej wartości</a>
+                  </li>
+                  <li>
+                    <a href="#iteracja-po-pakiecie-danych" class="toc-h2 toc-link" data-title="Iteracja po pakiecie danych">Iteracja po pakiecie danych</a>
+                  </li>
+                  <li>
+                    <a href="#sprawdzenie-wartosci-konczacej-program" class="toc-h2 toc-link" data-title="Sprawdzenie wartości kończącej program">Sprawdzenie wartości kończącej program</a>
+                  </li>
+                  <li>
+                    <a href="#sprawdzenie-zakresu-odczytanej-wartosci" class="toc-h2 toc-link" data-title="Sprawdzenie zakresu odczytanej wartości">Sprawdzenie zakresu odczytanej wartości</a>
+                  </li>
+                  <li>
+                    <a href="#znak-aktualnej-poprzedniej-liczby" class="toc-h2 toc-link" data-title="Znak aktualnej, poprzedniej liczby">Znak aktualnej, poprzedniej liczby</a>
+                  </li>
+                  <li>
+                    <a href="#przeciecie-zera" class="toc-h2 toc-link" data-title="Przecięcie zera">Przecięcie zera</a>
+                  </li>
+                  <li>
+                    <a href="#przepis-znaku" class="toc-h2 toc-link" data-title="Przepis znaku">Przepis znaku</a>
+                  </li>
+                  <li>
+                    <a href="#wielkosc-pakietu" class="toc-h2 toc-link" data-title="Wielkość pakietu">Wielkość pakietu</a>
+                  </li>
+                  <li>
+                    <a href="#czestotliowosc" class="toc-h2 toc-link" data-title="Częstotliowość">Częstotliowość</a>
+                  </li>
+                  <li>
+                    <a href="#przywrocenie-danych-domyslnych" class="toc-h2 toc-link" data-title="Przywrócenie danych domyślnych">Przywrócenie danych domyślnych</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#testy" class="toc-h1 toc-link" data-title="Testy">Testy</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/xHeler'> - Github</a></li>
+            <li><a href='https://gitlab.com/bartosz.kwiatkowski'> - Gitlab</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='opis'>Opis</h1>
+<p>Dokumentacja programu z lab 2 - Przecięcia zera.</p>
+<h1 id='kod'>Kod</h1>
+<p>Program został napisany zgodnie ze standardem c99, kompilator GNU GCC.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>gcc <span class="nt">-std</span><span class="o">=</span>c99 <span class="nt">-Wall</span> <span class="nt">-pedantic</span> <span class="nt">-o</span> out/main.out main.c
+</code></pre></div><h2 id='biblioteki-stale'>Biblioteki, stałe</h2>
+<blockquote>
+<p>Biblioteki</p>
+</blockquote>
+<div class="highlight"><pre class="highlight c tab-c"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</span></code></pre></div>
+<blockquote>
+<p>Stałe</p>
+</blockquote>
+<div class="highlight"><pre class="highlight c tab-c"><code><span class="cp">#define MIN -10
+#define MAX 10
+#define FMIN 8
+#define FMAX 12
+#define SIZE_OF_PACKAGE 4
+#define END 99
+</span></code></pre></div>
+<p>Została biblioteka zaimplementowana biblioteka standardowa.
+Co do wartości stałych są to wartości zakresów poprawnych oraz
+wartość wielkości pakietu.</p>
+
+<table><thead>
+<tr>
+<th>Nazwa</th>
+<th>Wartość</th>
+<th>Opis</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MIN</td>
+<td>-10</td>
+<td>Wartość minimalna zakresu poprawnych danych</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>10</td>
+<td>Wartość maksymalna zakresu poprawnych danych</td>
+</tr>
+<tr>
+<td>FMIN</td>
+<td>8</td>
+<td>Wartość minimalna zakresu poprawnej częstotliowości</td>
+</tr>
+<tr>
+<td>FMAX</td>
+<td>12</td>
+<td>Wartość maksymalna zakresu poprawnej częstotliowości</td>
+</tr>
+<tr>
+<td>SIZE_OF_PACKAGE</td>
+<td>99</td>
+<td>Wielkość pakietu danych</td>
+</tr>
+<tr>
+<td>END</td>
+<td>99</td>
+<td>Wartość kończąca działanie programu</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">Jako SIZE_OF_PACKAGE zaleca się użycia liczby większej równej 1.</aside>
+
+<aside class="warning">Jako END zaleca się użycia liczby z poza zakresu MIN | MAX.</aside>
+<h2 id='zmienne-globalne-struktury'>Zmienne globalne, struktury</h2>
+<blockquote>
+<p>Struktura enum</p>
+</blockquote>
+<div class="highlight"><pre class="highlight c tab-c"><code><span class="k">typedef</span> <span class="k">enum</span><span class="p">{</span>
+    <span class="n">False</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">True</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">None</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> 
+<span class="p">}</span> <span class="n">sign</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>Zmienne globalne</p>
+</blockquote>
+<div class="highlight"><pre class="highlight c tab-c"><code><span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">numberAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">intersectionAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">sign</span> <span class="n">previousSign</span> <span class="o">=</span> <span class="n">None</span><span class="p">;</span>
+<span class="n">sign</span> <span class="n">actuallySign</span> <span class="o">=</span> <span class="n">None</span><span class="p">;</span>
+</code></pre></div>
+<p>Użyłem strukturę enum, która jest typem wyliczeniowym
+i dla kolejnych argumentów przyjmuje rosnące wartości.
+Wartości globalne to aktualnie odczytany numer, ilość 
+wartości w pakiecie oraz liczba przecięć. Przechowywany
+w strukturze enum jest znak.</p>
+<h3 id='struktura'>Struktura</h3>
+<table><thead>
+<tr>
+<th>Nazwa</th>
+<th>Wartość</th>
+<th>Opis</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>False</td>
+<td>0</td>
+<td>Wartość ta jest przyjmowana dla liczby ujemnej</td>
+</tr>
+<tr>
+<td>True</td>
+<td>1</td>
+<td>Wartość ta jest przyjmowana dla liczby dodatniej</td>
+</tr>
+<tr>
+<td>None</td>
+<td>2</td>
+<td>Wartość przejściowa</td>
+</tr>
+</tbody></table>
+<h3 id='zmienne-globalne'>Zmienne globalne</h3>
+<table><thead>
+<tr>
+<th>Nazwa</th>
+<th>Wartość</th>
+<th>Opis</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>null</td>
+<td>Przechowywany aktualna wartość</td>
+</tr>
+<tr>
+<td>numberAmount</td>
+<td>0</td>
+<td>Ilość liczb liczących w pakiecie</td>
+</tr>
+<tr>
+<td>intersectionAmount</td>
+<td>0</td>
+<td>Ilość przecięc zera</td>
+</tr>
+<tr>
+<td>previousSign</td>
+<td>None</td>
+<td>Znak poprzedniej liczby</td>
+</tr>
+<tr>
+<td>actuallySign</td>
+<td>None</td>
+<td>Znak aktualnie badanej liczby</td>
+</tr>
+</tbody></table>
+<h2 id='sprawdzanie-odczytanej-wartosci'>Sprawdzanie odczytanej wartości</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">number</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>Warunkiem wykonania jest wczytanie przez scanf wartości typu int,
+czyli puste linie są nie brane pod uwagę.</p>
+<h2 id='iteracja-po-pakiecie-danych'>Iteracja po pakiecie danych</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="n">numberAmount</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>
+<p>Liczba danych aktualnie liczonego pakietu zostaje iterowana.</p>
+<h2 id='sprawdzenie-wartosci-konczacej-program'>Sprawdzenie wartości kończącej program</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="n">END</span><span class="p">){</span>
+  <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Program zostaje zakończony po odczytaniu wartości END deklarowanej wcześniej.</p>
+<h2 id='sprawdzenie-zakresu-odczytanej-wartosci'>Sprawdzenie zakresu odczytanej wartości</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">&gt;=</span> <span class="n">MIN</span> <span class="o">&amp;&amp;</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX</span><span class="p">)</span>
+</code></pre></div>
+<p>Program sprawdza czy odczytana liczba mieści się w ramie wcześniej
+sprecyzowanego zakresu.</p>
+<h2 id='znak-aktualnej-poprzedniej-liczby'>Znak aktualnej, poprzedniej liczby</h2><h3 id='przypadek-zera-lub-zer'>Przypadek zera lub zer</h3>
+<blockquote>
+<p>Pętla w pętli</p>
+</blockquote>
+<div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">numberAmount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  
+    <span class="n">actuallySign</span> <span class="o">=</span> <span class="n">previousSign</span><span class="p">;</span>
+</code></pre></div>
+<p>Tutaj przekazywana jest informacja o poprzednim znaku w przypadku
+gdy pojawia się zero. Zero działa jak kurer przekazujący znak znajdujący
+się przed sekcją zera lub zer.</p>
+<h3 id='przypisanie-znaku'>Przypisanie znaku</h3><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>      <span class="n">actuallySign</span> <span class="o">=</span> <span class="n">True</span><span class="p">;</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">actuallySign</span> <span class="o">=</span> <span class="n">False</span><span class="p">;</span>
+</code></pre></div>
+<p>W przypadku gdy liczba jest większa od zera znak zmieniamy na True,
+w przeciwnym razie na False.</p>
+<h2 id='przeciecie-zera'>Przecięcie zera</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(((</span><span class="n">actuallySign</span> <span class="o">^</span> <span class="n">previousSign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+  <span class="n">previousSign</span> <span class="o">!=</span> <span class="n">None</span> <span class="o">&amp;&amp;</span> <span class="n">actuallySign</span> <span class="o">!=</span> <span class="n">None</span><span class="p">)</span>
+    <span class="n">intersectionAmount</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>
+<p>Przecięcie zera występuje jeżeli poprzednia wartość i aktualna są różne od None
+oraz gdy alternatywa rozłączna znaków jest równa 1.</p>
+<h3 id='alternatywa-rozlaczna-xor'>Alternatywa rozłączna XOR</h3>
+<table><thead>
+<tr>
+<th>P</th>
+<th>Q</th>
+<th></th>
+<th>P^Q</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td></td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td></td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h2 id='przepis-znaku'>Przepis znaku</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">numberAmount</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">previousSign</span> <span class="o">=</span> <span class="n">actuallySign</span><span class="p">;</span>
+</code></pre></div>
+<p>Gdy znak został juz sprawdzony dla danej liczby jest przekazywany dla kolejnej
+w zmiennej previousSign.</p>
+<h2 id='wielkosc-pakietu'>Wielkość pakietu</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span><span class="n">numberAmount</span> <span class="o">==</span> <span class="n">SIZE_OF_PACKAGE</span><span class="p">)</span>
+</code></pre></div>
+<p>Gdy ilość liczb jest równa wielkości pakietu następuje zamknięcie 
+pojedyńczego pakietu danych.</p>
+<h2 id='czestotliowosc'>Częstotliowość</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="k">if</span> <span class="p">(</span> <span class="n">FMIN</span> <span class="o">&gt;</span> <span class="n">intersectionAmount</span> <span class="o">||</span> <span class="n">FMAX</span> <span class="o">&lt;</span> <span class="n">intersectionAmount</span><span class="p">){</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Nieprawidlowy puls: %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">intersectionAmount</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Prawidlowy puls: %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">intersectionAmount</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Jeżeli częstotliowość nie mieści się w danym przedziale pokazana jest informacja
+o nieprawidłowej częstotliości w przeciwnym wypadku o poprawnej.</p>
+
+<aside class="warning">W orginalnym programie powinna być wyświetlana tylko wartość niepoprawna.
+Mój program pokazuje obie w celu łatwiejszego sprawdzenia.</aside>
+<h2 id='przywrocenie-danych-domyslnych'>Przywrócenie danych domyślnych</h2><div class="highlight"><pre class="highlight c tab-c"><code><span class="n">number</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">numberAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">intersectionAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">previousSign</span> <span class="o">=</span> <span class="n">None</span><span class="p">;</span>
+<span class="n">actuallySign</span> <span class="o">=</span> <span class="n">None</span><span class="p">;</span>
+</code></pre></div>
+<p>Przywracane są dane do stanów początkowych aby można było bezbłędnie
+sprawdzić kolejny pakiet.</p>
+<h1 id='testy'>Testy</h1><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Open file
+</span><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"path"</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Lines</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># Getting value from file and packing to array
+</span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">Lines</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Wartosci jako punkty'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s">'Wartosci jako funkcja'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="s">'k--'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s">'k--'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s">'k--'</span><span class="p">)</span>
+
+<span class="c1"># Adding extra info
+</span><span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Numer pakietu w czasie"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Wartość"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1"># Main plot size
+</span><span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Wykresy sporzadzone zostały w języku python. Wersja 3.7.4, biblioteka matplotlib.
+Każdy test wykonany takim samym kodem.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="c">c</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

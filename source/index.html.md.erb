@@ -4,6 +4,8 @@ title: Przecięcia zera
 language_tabs: # must be one of https://git.io/vQNgJ
   - c
   - python
+  - shell
+  - text
 
 toc_footers:
   - <a href='https://github.com/xHeler'> - Github</a>
@@ -22,9 +24,19 @@ Dokumentacja programu z lab 2 - Przecięcia zera.
 
 Program został napisany zgodnie ze standardem c99, kompilator GNU GCC.
 
+> Kompilacja 
+
 ```shell
 gcc -std=c99 -Wall -pedantic -o out/main.out main.c
 ```
+
+> Uruchamianie 
+
+```shell
+cut -d ' ' -f 2- dane/przeciecia_zera1.txt | cut -d '.' -f1 | ./out/main.out
+```
+
+
 
 ## Biblioteki, stałe
 
@@ -271,4 +283,140 @@ plt.show()
 Wykresy sporzadzone zostały w języku python. Wersja 3.7.4, biblioteka matplotlib.
 Każdy test wykonany takim samym kodem.
 
+##Test 1
 
+> Dane
+
+```text
+7
+-9
+5
+-3
+99
+```
+
+<%= image_tag "images/test1.png" %>
+
+##Test 2
+
+> Dane
+
+```text
+8
+0
+0
+-6
+-8
+0
+-2
+-5
+99
+```
+
+<%= image_tag "images/test2.png" %>
+
+##Test 3
+
+> Dane
+
+```text
+5
+3
+2
+1
+-1
+-4
+-7
+-8
+99
+```
+
+<%= image_tag "images/test3.png" %>
+
+##Test 4
+
+> Dane
+
+```text
+4
+3
+-4
+-7
+0
+-1
+-3
+-8
+99
+```
+
+<%= image_tag "images/test4.png" %>
+
+##Test 5
+
+> Dane
+
+```text
+9
+6
+
+-3
+-6
+-8
+
+-9
+-5
+-2
+99
+```
+
+<%= image_tag "images/test5.png" %>
+
+##Test 6
+
+> Dane
+
+```text
+5
+13
+-3
+3
+-3
+-7
+-8
+-12
+-8
+99
+```
+
+<%= image_tag "images/test6.png" %>
+
+##Test 7
+
+> Dane
+
+```text
+13
+10
+4
+-3
+-15
+-7
+-3
+2
+99
+```
+
+<%= image_tag "images/test7.png" %>
+
+##Test 8
+
+> Dane
+
+```text
+3
+6
+-12
+99
+```
+
+<%= image_tag "images/test8.png" %>
